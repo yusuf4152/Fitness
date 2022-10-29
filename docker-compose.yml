@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  fitnessDb:
+    container_name: "fitnessDb"
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: fitness
+      MYSQL_ROOT_PASSWORD: root

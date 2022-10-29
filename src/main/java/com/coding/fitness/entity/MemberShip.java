@@ -1,5 +1,7 @@
 package com.coding.fitness.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -7,16 +9,16 @@ import java.time.LocalDateTime;
 public class MemberShip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "company_id")
     private Company company;
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "memberShip")
+    @OneToOne
     private User user;
     private LocalDateTime startDate;
     private LocalDateTime finishDate;
 
-    public MemberShip(String id, Company company, User user, LocalDateTime startDate, LocalDateTime finishDate) {
+    public MemberShip(Long id, Company company, User user, LocalDateTime startDate, LocalDateTime finishDate) {
         this.id = id;
         this.company = company;
         this.user = user;
@@ -28,11 +30,11 @@ public class MemberShip {
 
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
