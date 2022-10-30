@@ -3,8 +3,10 @@ package com.coding.fitness.controller;
 import com.coding.fitness.dto.CreateUserDto;
 import com.coding.fitness.dto.GetUserDto;
 import com.coding.fitness.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,13 +18,24 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping("/createUser")
-    public GetUserDto createUser(@RequestBody CreateUserDto createUserDto) {
-        return userService.createUser(createUserDto);
+    public ResponseEntity<GetUserDto> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
+        return ResponseEntity.ok(userService.createUser(createUserDto));
     }
+
     @GetMapping("/getAllUsers")
-    public List<GetUserDto> getALlUsers(@RequestParam(name = "page", defaultValue = "1") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size){
-     return userService.getAllUser(page,size);
+    public ResponseEntity<List<GetUserDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUser());
+    }
+
+    @GetMapping("/getAllUsersByName")
+    public ResponseEntity<List<GetUserDto>> getAllUsersByName(@RequestParam String name) {
+        return ResponseEntity.ok(userService.getAllUserByName(name));
+    }
+
+    @DeleteMapping("/deleteUserById")
+    public ResponseEntity<GetUserDto> deleteUserById(@RequestParam String id) {
+        return ResponseEntity.ok(userService.deleteUserById(id));
     }
 }

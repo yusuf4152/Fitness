@@ -3,6 +3,7 @@ package com.coding.fitness.controller;
 import com.coding.fitness.dto.CreateCompanyDto;
 import com.coding.fitness.dto.GetCompanyDto;
 import com.coding.fitness.service.CompanyService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,17 @@ public class CompanyController {
     }
 
     @PostMapping("/createCompany")
-    public GetCompanyDto createCompany(@RequestBody CreateCompanyDto createCompanyDto) {
-        return companyService.createCompany(createCompanyDto);
+    public ResponseEntity<GetCompanyDto> createCompany(@RequestBody CreateCompanyDto createCompanyDto) {
+        return ResponseEntity.ok(companyService.createCompany(createCompanyDto));
     }
 
-    @GetMapping(value = "/getAllCompanies")
-    public List<GetCompanyDto> getAllCompanies(@RequestParam(name = "page", defaultValue = "1") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size) {
-        return companyService.getAllCompanies(page, size);
+    @GetMapping("/getAllCompanies")
+    public ResponseEntity<List<GetCompanyDto>> getAllCompanies() {
+        return ResponseEntity.ok(companyService.getAllCompanies());
+    }
+
+    @GetMapping("/getAllCompaniesByName")
+    public ResponseEntity<List<GetCompanyDto>> getAllCompaniesByName(@RequestParam String name) {
+        return ResponseEntity.ok(companyService.getAllCompanyByName(name));
     }
 }

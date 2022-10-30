@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,22 @@ public class CompanyService {
         return getCompanyDtoConverter.convert(savedCompany);
     }
 
-    public List<GetCompanyDto> getAllCompanies(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return companyRepository.findAll(pageable).get()
+    public List<GetCompanyDto> getAllCompanies() {
+        return companyRepository
+                .findAll()
+                .stream()
+                .map(getCompanyDtoConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+    protected Company getCompanyById(String id) {
+        return companyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " company not found"));
+    }
+
+    public List<GetCompanyDto> getAllCompanyByName(String name) {
+        return companyRepository
+                .findAllByName(name)
+                .stream()
                 .map(getCompanyDtoConverter::convert)
                 .collect(Collectors.toList());
     }

@@ -1,24 +1,15 @@
-package com.coding.fitness.entity;
+package com.coding.fitness.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-public class MemberShip {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GetMemberShipDto {
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "company_id")
-    private Company company;
-    @OneToOne(fetch = FetchType.EAGER)
-    private User user;
+    private GetCompanyDto company;
+    private GetUserDto user;
     private LocalDateTime startDate;
     private LocalDateTime finishDate;
 
-    public MemberShip(Long id, Company company, User user, LocalDateTime startDate, LocalDateTime finishDate) {
+    public GetMemberShipDto(Long id, GetCompanyDto company, GetUserDto user, LocalDateTime startDate, LocalDateTime finishDate) {
         this.id = id;
         this.company = company;
         this.user = user;
@@ -26,7 +17,7 @@ public class MemberShip {
         this.finishDate = finishDate;
     }
 
-    public MemberShip() {
+    public GetMemberShipDto() {
 
     }
 
@@ -38,19 +29,19 @@ public class MemberShip {
         this.id = id;
     }
 
-    public Company getCompany() {
+    public GetCompanyDto getCompany() {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(GetCompanyDto company) {
         this.company = company;
     }
 
-    public User getUser() {
+    public GetUserDto getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(GetUserDto user) {
         this.user = user;
     }
 

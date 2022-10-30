@@ -1,6 +1,5 @@
 package com.coding.fitness.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,12 +19,12 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    private Role role=Role.USER;
+    private Role role = Role.USER;
     private LocalDateTime createdAt = LocalDateTime.now();
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private MemberShip memberShip;
-    private boolean isActive=false;
-    private boolean isDeleted=true;
+    private boolean isActive = false;
+    private boolean isDeleted = false;
 
     public User(String id, String name, String surname, int age, String email, String password, Role role, LocalDateTime createdAt, MemberShip memberShip) {
         this.id = id;

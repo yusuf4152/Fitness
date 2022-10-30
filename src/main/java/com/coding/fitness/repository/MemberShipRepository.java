@@ -3,5 +3,8 @@ package com.coding.fitness.repository;
 import com.coding.fitness.entity.MemberShip;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberShipRepository extends JpaRepository<MemberShip,Long>{
+import java.util.List;
+
+public interface MemberShipRepository extends JpaRepository<MemberShip, Long> {
+    List<MemberShip> findAllByCompany_Id(String id);
 }
