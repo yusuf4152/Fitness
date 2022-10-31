@@ -1,6 +1,5 @@
 package com.coding.fitness.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +16,7 @@ public class MemberShip {
     private User user;
     private LocalDateTime startDate;
     private LocalDateTime finishDate;
+    private boolean isActive = true;
 
     public MemberShip(Long id, Company company, User user, LocalDateTime startDate, LocalDateTime finishDate) {
         this.id = id;
@@ -36,6 +36,14 @@ public class MemberShip {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public Company getCompany() {

@@ -27,4 +27,8 @@ public class MemberShipController {
     public ResponseEntity<List<GetMemberShipDto>> getAllMemberShipsHasCompany(@RequestParam String companyId) {
         return ResponseEntity.ok(memberShipService.getAllMemberShipsHasCompany(companyId));
     }
+    @GetMapping("/getUserMemberShip")
+    public ResponseEntity<GetMemberShipDto> getUserMemberShip(@RequestParam String userId) {
+        return ResponseEntity.ok(memberShipService.getUserMemberShip(userId));
+    }
 }

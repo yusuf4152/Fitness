@@ -6,6 +6,7 @@ import com.coding.fitness.dto.converter.GetMemberShipDtoConverter;
 import com.coding.fitness.entity.MemberShip;
 import com.coding.fitness.entity.User;
 import com.coding.fitness.repository.MemberShipRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class MemberShipService {
     private final UserService userService;
     private final CompanyService companyService;
 
-    public MemberShipService(MemberShipRepository memberShipRepository, GetMemberShipDtoConverter getMemberShipDtoConverter, UserService userService, CompanyService companyService) {
+    public MemberShipService(MemberShipRepository memberShipRepository, GetMemberShipDtoConverter getMemberShipDtoConverter, @Lazy UserService userService, CompanyService companyService) {
         this.memberShipRepository = memberShipRepository;
         this.getMemberShipDtoConverter = getMemberShipDtoConverter;
         this.userService = userService;
@@ -37,9 +38,21 @@ public class MemberShipService {
     }
 
     public List<GetMemberShipDto> getAllMemberShipsHasCompany(String companyId) {
-        return memberShipRepository.findAllByCompany_Id(companyId)
+        return memberShipRepository.findAllByCompany_IdAndIsActiveTrue(companyId)
                 .stream()
                 .map(getMemberShipDtoConverter::convert)
                 .collect(Collectors.toList());
+    }
+
+    public GetMemberShipDto getUserMemberShip(String userId) {
+        User user = userService.getUserById(userId);
+        MemberShip memberShip = memberShipRepository.findByUser_Id(user.getId());
+        return getMemberShipDtoConverter.convert(memberShip);
+    }
+
+    protected void deleteMemberShipByUserId(String userId) {
+        MemberShip memberShip = memberShipRepository.findByUser_Id(userId);
+        memberShip.setActive(false);
+        memberShipRepository.save(memberShip);
     }
 }

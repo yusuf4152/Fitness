@@ -17,10 +17,12 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository userRepository;
     private final GetUserDtoConverter getUserDtoConverter;
-
-    public UserService(UserRepository userRepository, GetUserDtoConverter getUserDtoConverter) {
+    private final UserMemberShipTransactionService userMemberShipTransactionService;
+    public UserService(UserRepository userRepository, GetUserDtoConverter getUserDtoConverter,
+                       UserMemberShipTransactionService userMemberShipTransactionService) {
         this.userRepository = userRepository;
         this.getUserDtoConverter = getUserDtoConverter;
+        this.userMemberShipTransactionService = userMemberShipTransactionService;
     }
 
     public GetUserDto createUser(CreateUserDto createUserDto) {
@@ -30,7 +32,7 @@ public class UserService {
         user.setName(createUserDto.getName());
         user.setSurname(createUserDto.getSurname());
         user.setPassword(createUserDto.getPassword());
-        if (!emailDuplicateCheck(createUserDto.getEmail())) {
+        if (emailDuplicateCheck(createUserDto.getEmail())) {
             throw new DataIntegrityViolationException(createUserDto.getEmail() + " kullanılmıştır");
         }
         User savedUser = userRepository.save(user);
@@ -53,6 +55,7 @@ public class UserService {
         User user = getUserById(id);
         user.setDeleted(true);
         userRepository.save(user);
+        userMemberShipTransactionService.deleteMemberShipByUserId(id);
         return getUserDtoConverter.convert(user);
     }
 
