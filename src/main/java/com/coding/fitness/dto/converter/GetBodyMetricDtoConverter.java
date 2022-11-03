@@ -1,6 +1,6 @@
 package com.coding.fitness.dto.converter;
 
-import com.coding.fitness.dto.GetBodyMetricDto;
+import com.coding.fitness.dto.responses.GetBodyMetricDto;
 import com.coding.fitness.entity.BodyMetric;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.coding.fitness.dto.converter;
 
-import com.coding.fitness.dto.GetMemberShipDto;
+import com.coding.fitness.dto.responses.GetMemberShipDto;
 import com.coding.fitness.entity.MemberShip;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,8 @@
 package com.coding.fitness.service;
 
-import com.coding.fitness.dto.CreateUserDto;
-import com.coding.fitness.dto.GetUserDto;
+import com.coding.fitness.dto.requests.CreateUserDto;
+import com.coding.fitness.dto.requests.UpdateUserDto;
+import com.coding.fitness.dto.responses.GetUserDto;
 import com.coding.fitness.dto.converter.GetUserDtoConverter;
 import com.coding.fitness.entity.User;
 import com.coding.fitness.repository.UserRepository;
@@ -18,6 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final GetUserDtoConverter getUserDtoConverter;
     private final UserMemberShipTransactionService userMemberShipTransactionService;
+
     public UserService(UserRepository userRepository, GetUserDtoConverter getUserDtoConverter,
                        UserMemberShipTransactionService userMemberShipTransactionService) {
         this.userRepository = userRepository;
@@ -37,6 +39,14 @@ public class UserService {
         }
         User savedUser = userRepository.save(user);
         return getUserDtoConverter.convert(savedUser);
+    }
+
+    public GetUserDto updateUser(UpdateUserDto updateUserDto) {
+        User user = getUserById(updateUserDto.getUserId());
+        user.setAge((updateUserDto.getAge() == 0) ? user.getAge() : updateUserDto.getAge());
+        user.setName((updateUserDto.getName() == null) ? user.getName() : updateUserDto.getName());
+        user.setSurname((updateUserDto.getSurname() == null) ? user.getSurname() : updateUserDto.getSurname());
+        return getUserDtoConverter.convert(userRepository.save(user));
     }
 
     protected User getUserById(String id) {

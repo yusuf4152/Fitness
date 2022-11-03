@@ -1,4 +1,4 @@
-package com.coding.fitness.dto;
+package com.coding.fitness.dto.responses;
 
 import java.time.LocalDateTime;
 

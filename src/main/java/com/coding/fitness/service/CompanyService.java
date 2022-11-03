@@ -1,12 +1,11 @@
 package com.coding.fitness.service;
 
-import com.coding.fitness.dto.CreateCompanyDto;
-import com.coding.fitness.dto.GetCompanyDto;
+import com.coding.fitness.dto.requests.CreateCompanyDto;
+import com.coding.fitness.dto.requests.UpdateCompanyDto;
+import com.coding.fitness.dto.responses.GetCompanyDto;
 import com.coding.fitness.dto.converter.GetCompanyDtoConverter;
 import com.coding.fitness.entity.Company;
 import com.coding.fitness.repository.CompanyRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -38,6 +37,14 @@ public class CompanyService {
                 .stream()
                 .map(getCompanyDtoConverter::convert)
                 .collect(Collectors.toList());
+    }
+
+    public GetCompanyDto updateCompany(UpdateCompanyDto updateCompanyDto) {
+        Company company = getCompanyById(updateCompanyDto.getId());
+        company.setName((updateCompanyDto.getName()) == null ? company.getName() : updateCompanyDto.getName());
+        company.setAddress((updateCompanyDto.getAddress()) == null ? company.getAddress() : updateCompanyDto.getAddress());
+        company.setPhoneNumber((updateCompanyDto.getPhoneNumber()) == null ? company.getPhoneNumber() : updateCompanyDto.getPhoneNumber());
+        return getCompanyDtoConverter.convert(companyRepository.save(company));
     }
 
     protected Company getCompanyById(String id) {

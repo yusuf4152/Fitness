@@ -1,8 +1,8 @@
 package com.coding.fitness.controller;
 
 
-import com.coding.fitness.dto.CreateBodyMetricDto;
-import com.coding.fitness.dto.GetBodyMetricDto;
+import com.coding.fitness.dto.requests.CreateBodyMetricDto;
+import com.coding.fitness.dto.responses.GetBodyMetricDto;
 import com.coding.fitness.service.BodyMetricService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,14 +1,17 @@
 package com.coding.fitness.service;
 
-import com.coding.fitness.dto.CreateMemberShipDto;
-import com.coding.fitness.dto.GetMemberShipDto;
+import com.coding.fitness.dto.requests.CreateMemberShipDto;
+import com.coding.fitness.dto.requests.UpdateMemberShipDto;
+import com.coding.fitness.dto.responses.GetMemberShipDto;
 import com.coding.fitness.dto.converter.GetMemberShipDtoConverter;
 import com.coding.fitness.entity.MemberShip;
 import com.coding.fitness.entity.User;
 import com.coding.fitness.repository.MemberShipRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +40,19 @@ public class MemberShipService {
         return getMemberShipDtoConverter.convert(savedMemberShip);
     }
 
+    public GetMemberShipDto updateMemberShip(UpdateMemberShipDto updateMemberShipDto) {
+        MemberShip memberShip = getMemberShipById(updateMemberShipDto.getId());
+        memberShip.setStartDate(
+                (updateMemberShipDto.getStartDate() == null) ? memberShip.getStartDate() : updateMemberShipDto.getStartDate());
+        memberShip.setFinishDate(
+                (updateMemberShipDto.getFinishDate() == null) ? memberShip.getFinishDate() : updateMemberShipDto.getFinishDate());
+        return getMemberShipDtoConverter.convert(memberShip);
+    }
+
+    protected MemberShip getMemberShipById(long id) {
+        return memberShipRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " not found"));
+    }
+
     public List<GetMemberShipDto> getAllMemberShipsHasCompany(String companyId) {
         return memberShipRepository.findAllByCompany_IdAndIsActiveTrue(companyId)
                 .stream()
@@ -46,12 +62,12 @@ public class MemberShipService {
 
     public GetMemberShipDto getUserMemberShip(String userId) {
         User user = userService.getUserById(userId);
-        MemberShip memberShip = memberShipRepository.findByUser_Id(user.getId());
+        MemberShip memberShip = memberShipRepository.findByUser_IdAndIsActiveTrue(user.getId());
         return getMemberShipDtoConverter.convert(memberShip);
     }
 
     protected void deleteMemberShipByUserId(String userId) {
-        MemberShip memberShip = memberShipRepository.findByUser_Id(userId);
+        MemberShip memberShip = memberShipRepository.findByUser_IdAndIsActiveTrue(userId);
         memberShip.setActive(false);
         memberShipRepository.save(memberShip);
     }

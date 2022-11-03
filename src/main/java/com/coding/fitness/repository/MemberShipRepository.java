@@ -8,5 +8,5 @@ import java.util.List;
 public interface MemberShipRepository extends JpaRepository<MemberShip, Long> {
     List<MemberShip> findAllByCompany_IdAndIsActiveTrue(String id);
 
-    MemberShip findByUser_Id(String id);
+    MemberShip findByUser_IdAndIsActiveTrue(String id);
 }

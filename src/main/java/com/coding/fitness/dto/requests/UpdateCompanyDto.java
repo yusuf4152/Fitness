@@ -1,21 +1,23 @@
-package com.coding.fitness.dto;
+package com.coding.fitness.dto.requests;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-public class GetCompanyDto {
+public class UpdateCompanyDto {
+
+    @NotBlank(message = "id must be not blank")
+    @NotNull(message = "id must be not null")
     private String id;
+    @NotBlank(message = "name must be not blank")
     private String name;
+    @NotBlank(message = "address must be not blank")
     private String address;
-    private LocalDateTime createdAt;
+    @NotBlank(message = "phone number must be not blank")
     private String phoneNumber;
 
-    public GetCompanyDto(String id, String name, String address, LocalDateTime createdAt, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.createdAt = createdAt;
-        this.phoneNumber = phoneNumber;
+    public UpdateCompanyDto() {
     }
+
 
     public String getId() {
         return id;
@@ -39,14 +41,6 @@ public class GetCompanyDto {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getPhoneNumber() {

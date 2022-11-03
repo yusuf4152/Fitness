@@ -1,4 +1,4 @@
-package com.coding.fitness.dto;
+package com.coding.fitness.dto.requests;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

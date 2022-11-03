@@ -1,7 +1,8 @@
 package com.coding.fitness.controller;
 
-import com.coding.fitness.dto.CreateUserDto;
-import com.coding.fitness.dto.GetUserDto;
+import com.coding.fitness.dto.requests.CreateUserDto;
+import com.coding.fitness.dto.requests.UpdateUserDto;
+import com.coding.fitness.dto.responses.GetUserDto;
 import com.coding.fitness.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +38,10 @@ public class UserController {
     @DeleteMapping("/deleteUserById")
     public ResponseEntity<GetUserDto> deleteUserById(@RequestParam String id) {
         return ResponseEntity.ok(userService.deleteUserById(id));
+    }
+
+    @PutMapping("/updateUser")
+    public ResponseEntity<GetUserDto> updateUser(@Valid @RequestBody UpdateUserDto updateUserDto) {
+        return ResponseEntity.ok(userService.updateUser(updateUserDto));
     }
 }

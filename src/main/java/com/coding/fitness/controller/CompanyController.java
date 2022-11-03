@@ -1,11 +1,13 @@
 package com.coding.fitness.controller;
 
-import com.coding.fitness.dto.CreateCompanyDto;
-import com.coding.fitness.dto.GetCompanyDto;
+import com.coding.fitness.dto.requests.CreateCompanyDto;
+import com.coding.fitness.dto.requests.UpdateCompanyDto;
+import com.coding.fitness.dto.responses.GetCompanyDto;
 import com.coding.fitness.service.CompanyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,7 +20,7 @@ public class CompanyController {
     }
 
     @PostMapping("/createCompany")
-    public ResponseEntity<GetCompanyDto> createCompany(@RequestBody CreateCompanyDto createCompanyDto) {
+    public ResponseEntity<GetCompanyDto> createCompany(@Valid @RequestBody CreateCompanyDto createCompanyDto) {
         return ResponseEntity.ok(companyService.createCompany(createCompanyDto));
     }
 
@@ -30,5 +32,10 @@ public class CompanyController {
     @GetMapping("/getAllCompaniesByName")
     public ResponseEntity<List<GetCompanyDto>> getAllCompaniesByName(@RequestParam String name) {
         return ResponseEntity.ok(companyService.getAllCompanyByName(name));
+    }
+
+    @PutMapping("/updateCompany")
+    public ResponseEntity<GetCompanyDto> updateCompany(@Valid @RequestBody UpdateCompanyDto updateCompanyDto) {
+        return ResponseEntity.ok(companyService.updateCompany(updateCompanyDto));
     }
 }

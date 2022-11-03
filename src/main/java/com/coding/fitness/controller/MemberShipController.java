@@ -1,7 +1,8 @@
 package com.coding.fitness.controller;
 
-import com.coding.fitness.dto.CreateMemberShipDto;
-import com.coding.fitness.dto.GetMemberShipDto;
+import com.coding.fitness.dto.requests.CreateMemberShipDto;
+import com.coding.fitness.dto.requests.UpdateMemberShipDto;
+import com.coding.fitness.dto.responses.GetMemberShipDto;
 import com.coding.fitness.service.MemberShipService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,14 @@ public class MemberShipController {
     public ResponseEntity<List<GetMemberShipDto>> getAllMemberShipsHasCompany(@RequestParam String companyId) {
         return ResponseEntity.ok(memberShipService.getAllMemberShipsHasCompany(companyId));
     }
+
     @GetMapping("/getUserMemberShip")
     public ResponseEntity<GetMemberShipDto> getUserMemberShip(@RequestParam String userId) {
         return ResponseEntity.ok(memberShipService.getUserMemberShip(userId));
+    }
+
+    @PutMapping("/updateMemberShip")
+    public ResponseEntity<GetMemberShipDto> updateMemberShip(@RequestParam UpdateMemberShipDto updateMemberShipDto) {
+        return ResponseEntity.ok(memberShipService.updateMemberShip(updateMemberShipDto));
     }
 }

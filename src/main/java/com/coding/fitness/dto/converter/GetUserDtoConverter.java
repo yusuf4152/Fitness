@@ -1,6 +1,6 @@
 package com.coding.fitness.dto.converter;
 
-import com.coding.fitness.dto.GetUserDto;
+import com.coding.fitness.dto.responses.GetUserDto;
 import com.coding.fitness.entity.User;
 import org.springframework.stereotype.Component;
 

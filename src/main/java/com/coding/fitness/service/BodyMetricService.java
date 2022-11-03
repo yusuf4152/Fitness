@@ -1,7 +1,7 @@
 package com.coding.fitness.service;
 
-import com.coding.fitness.dto.CreateBodyMetricDto;
-import com.coding.fitness.dto.GetBodyMetricDto;
+import com.coding.fitness.dto.requests.CreateBodyMetricDto;
+import com.coding.fitness.dto.responses.GetBodyMetricDto;
 import com.coding.fitness.dto.converter.GetBodyMetricDtoConverter;
 import com.coding.fitness.entity.BodyMetric;
 import com.coding.fitness.repository.BodyMetricRepository;
