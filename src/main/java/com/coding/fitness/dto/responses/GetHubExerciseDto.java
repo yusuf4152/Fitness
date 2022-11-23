@@ -10,6 +10,10 @@ public class GetHubExerciseDto {
     private String type;
     private List<String> steps;
 
+    private String imagePath;
+    private String imageFileName;
+
+
     public GetHubExerciseDto() {
     }
 
@@ -59,5 +63,21 @@ public class GetHubExerciseDto {
 
     public void setSteps(List<String> steps) {
         this.steps = steps;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 }

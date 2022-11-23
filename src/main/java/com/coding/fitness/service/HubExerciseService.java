@@ -46,7 +46,7 @@ public class HubExerciseService {
                 .map(getHubExerciseDtoConverter::convert).collect(Collectors.toList());
     }
 
-    public HubExercise saveImage(long id, MultipartFile file) {
+    public GetHubExerciseDto saveImage(long id, MultipartFile file) {
         //check if the file is empty
         if (file.isEmpty()) {
             throw new IllegalStateException("Cannot upload empty file");
@@ -75,7 +75,7 @@ public class HubExerciseService {
         hubExercise.setImagePath(path);
         hubExercise.setImageFileName(fileName);
         hubExerciseRepository.save(hubExercise);
-        return hubExercise;
+        return getHubExerciseDtoConverter.convert(hubExercise);
     }
 
     private HubExercise getHubExercise(long id) {

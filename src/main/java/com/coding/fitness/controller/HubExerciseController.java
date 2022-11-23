@@ -39,12 +39,12 @@ public class HubExerciseController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<HubExercise> saveImageByExerciseId(@RequestParam("file") MultipartFile file, @PathVariable long id) {
-        return new ResponseEntity<>(hubExerciseService.saveImage(id, file), HttpStatus.OK);
+    public ResponseEntity<GetHubExerciseDto> saveImageByExerciseId(@RequestParam("file") MultipartFile file, @PathVariable long id) {
+        return ResponseEntity.ok(hubExerciseService.saveImage(id, file));
     }
 
     @GetMapping(value = "/downloadImageByExerciseId/{id}")
-    public byte[] downloadImageByExerciseId(@PathVariable("id") Long id) {
-        return hubExerciseService.downloadImageByExerciseId(id);
+    public ResponseEntity<byte[]> downloadImageByExerciseId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(hubExerciseService.downloadImageByExerciseId(id));
     }
 }

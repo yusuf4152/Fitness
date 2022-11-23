@@ -14,6 +14,8 @@ public class GetHubExerciseDtoConverter {
         getHubExerciseDto.setSets(from.getSets());
         getHubExerciseDto.setType(from.getType());
         getHubExerciseDto.setSteps(from.getSteps());
+        getHubExerciseDto.setImagePath(from.getImagePath());
+        getHubExerciseDto.setImageFileName(from.getImageFileName());
         return getHubExerciseDto;
     }
 }
