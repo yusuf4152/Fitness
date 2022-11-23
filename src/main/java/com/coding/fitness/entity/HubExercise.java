@@ -13,6 +13,12 @@ public class HubExercise {
     @ElementCollection
     private List<String> sets;
     private String type;
+
+    private String imagePath;
+
+    private String imageFileName;
+
+
     @ElementCollection
     private List<String> steps;
 
@@ -33,6 +39,22 @@ public class HubExercise {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     public String getDescription() {
