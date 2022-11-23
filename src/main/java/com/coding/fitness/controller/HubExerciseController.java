@@ -2,9 +2,7 @@ package com.coding.fitness.controller;
 
 import com.coding.fitness.dto.requests.CreateHubExerciseDto;
 import com.coding.fitness.dto.responses.GetHubExerciseDto;
-import com.coding.fitness.entity.HubExercise;
 import com.coding.fitness.service.HubExerciseService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +30,11 @@ public class HubExerciseController {
     public ResponseEntity<List<GetHubExerciseDto>> getAllHubExercises() {
 
         return ResponseEntity.ok(hubExerciseService.getAllHubExercises());
+    }
+
+    @DeleteMapping("/deleteHubExerciseById")
+    public ResponseEntity<String> deleteHubExerciseById(long id) {
+        return ResponseEntity.ok(hubExerciseService.deleteHubExerciseById(id) + " " + "deleted");
     }
 
     @PostMapping(

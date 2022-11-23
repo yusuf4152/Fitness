@@ -78,6 +78,12 @@ public class HubExerciseService {
         return getHubExerciseDtoConverter.convert(hubExercise);
     }
 
+    public long deleteHubExerciseById(long id) {
+        HubExercise hubExercise = getHubExercise(id);
+        hubExerciseRepository.delete(hubExercise);
+        return id;
+    }
+
     private HubExercise getHubExercise(long id) {
         return hubExerciseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " " + "not found"));
     }

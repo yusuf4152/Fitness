@@ -1,8 +1,7 @@
 package com.coding.fitness.dto.responses;
 
 public class GetBodyMetricDto {
-    private GetUserDto user;
-
+    private long id;
     private double height;
 
     private double weight;
@@ -24,9 +23,19 @@ public class GetBodyMetricDto {
     private double fatRatio;
 
     private double muscleRatio;
+    private GetUserDto user;
+
 
     public GetUserDto getUser() {
         return user;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setUser(GetUserDto user) {

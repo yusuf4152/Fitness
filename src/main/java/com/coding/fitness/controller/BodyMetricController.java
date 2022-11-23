@@ -28,4 +28,9 @@ public class BodyMetricController {
     public ResponseEntity<List<GetBodyMetricDto>> getAllBodyMetricsByUserId(@RequestParam String userId) {
         return ResponseEntity.ok(bodyMetricService.getAllBodyMetricsByUserId(userId));
     }
+
+    @DeleteMapping("/deleteBodyMetricById/{id}")
+    public ResponseEntity<String> deleteBodyMetricById(@PathVariable long id) {
+        return ResponseEntity.ok(bodyMetricService.deleteBodyMetricById(id));
+    }
 }

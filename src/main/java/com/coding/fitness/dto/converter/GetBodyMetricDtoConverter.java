@@ -14,6 +14,7 @@ public class GetBodyMetricDtoConverter {
 
     public GetBodyMetricDto convert(BodyMetric from) {
         GetBodyMetricDto getBodyMetricDto = new GetBodyMetricDto();
+        getBodyMetricDto.setId(from.getId());
         getBodyMetricDto.setChest(from.getChest());
         getBodyMetricDto.setHeight(from.getHeight());
         getBodyMetricDto.setHip(from.getHip());

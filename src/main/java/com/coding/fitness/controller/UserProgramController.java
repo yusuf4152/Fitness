@@ -24,8 +24,14 @@ public class UserProgramController {
 
         return ResponseEntity.ok(userProgramService.createUserProgram(createUserProgramDto));
     }
+
     @GetMapping("/getAllUserProgram")
     public ResponseEntity<List<GetUserProgramDto>> getAllUserProgram(@RequestParam String userId) {
         return ResponseEntity.ok(userProgramService.getAllUserProgram(userId));
+    }
+
+    @DeleteMapping("/deleteUserProgramById/{id}")
+    public ResponseEntity<String> deleteUserProgramById(@PathVariable long id) {
+        return ResponseEntity.ok(userProgramService.deleteUserProgramById(id));
     }
 }

@@ -16,7 +16,7 @@ public class GetUserProgramDtoConverter {
 
     public GetUserProgramDto convert(UserProgram from) {
         GetUserProgramDto getUserProgramDto = new GetUserProgramDto();
-
+        getUserProgramDto.setId(from.getId());
         getUserProgramDto.setProgramName(from.getProgramName());
         getUserProgramDto.setStartDate(from.getStartDate());
         getUserProgramDto.setFinishDate(from.getFinishDate());

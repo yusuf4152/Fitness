@@ -4,11 +4,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class GetUserProgramDto {
+
+    private long id;
     private String programName;
     private LocalDateTime startDate;
     private LocalDateTime finishDate;
     private List<GetUserProgramExerciseDto> exercises;
     public GetUserProgramDto(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getProgramName() {
         return programName;

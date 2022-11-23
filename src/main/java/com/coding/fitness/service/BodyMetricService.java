@@ -7,6 +7,7 @@ import com.coding.fitness.entity.BodyMetric;
 import com.coding.fitness.repository.BodyMetricRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,16 @@ public class BodyMetricService {
                 .build();
         bodyMetricRepository.save(bodyMetric);
         return getBodyMetricDtoConverter.convert(bodyMetric);
+    }
+
+    public String deleteBodyMetricById(long id) {
+        BodyMetric bodyMetric = getBodyMetric(id);
+        bodyMetricRepository.delete(bodyMetric);
+        return id + " " + "deleted";
+    }
+
+    private BodyMetric getBodyMetric(long id) {
+        return bodyMetricRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " " + "not found"));
     }
 
     public List<GetBodyMetricDto> getAllBodyMetricsByUserId(String userId) {

@@ -10,6 +10,7 @@ import com.coding.fitness.entity.UserProgramExercise;
 import com.coding.fitness.repository.UserProgramRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,5 +53,15 @@ public class UserProgramService {
     public List<GetUserProgramDto> getAllUserProgram(String userId) {
         List<UserProgram> programs = userProgramRepository.findAllByUser_Id(userId);
         return programs.stream().map(getUserProgramDtoConverter::convert).collect(Collectors.toList());
+    }
+
+    private UserProgram getUserProgramById(long id) {
+        return userProgramRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id + " " + "not found"));
+    }
+
+    public String deleteUserProgramById(long id) {
+        UserProgram userProgram = getUserProgramById(id);
+        userProgramRepository.delete(userProgram);
+        return id + " " + "deleted";
     }
 }
