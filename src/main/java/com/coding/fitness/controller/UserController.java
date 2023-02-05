@@ -4,6 +4,7 @@ import com.coding.fitness.dto.requests.CreateUserDto;
 import com.coding.fitness.dto.requests.UpdateUserDto;
 import com.coding.fitness.dto.responses.GetUserDto;
 import com.coding.fitness.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +22,13 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    public ResponseEntity<GetUserDto> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
-        return ResponseEntity.ok(userService.createUser(createUserDto));
+    public ResponseEntity<GetUserDto> createUser(@RequestBody CreateUserDto createUserDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(createUserDto));
     }
 
     @GetMapping("/getAllUsers")
     public ResponseEntity<List<GetUserDto>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUser());
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
     }
 
     @GetMapping("/getAllUsersByName")

@@ -1,5 +1,7 @@
 package com.coding.fitness.dto.responses;
 
+import java.util.Objects;
+
 public class GetBodyMetricDto {
     private long id;
     private double height;
@@ -128,5 +130,18 @@ public class GetBodyMetricDto {
 
     public void setMuscleRatio(double muscleRatio) {
         this.muscleRatio = muscleRatio;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GetBodyMetricDto that = (GetBodyMetricDto) o;
+        return id == that.id && Double.compare(that.height, height) == 0 && Double.compare(that.weight, weight) == 0 && Double.compare(that.hip, hip) == 0 && Double.compare(that.chest, chest) == 0 && Double.compare(that.rightSleeve, rightSleeve) == 0 && Double.compare(that.leftSleeve, leftSleeve) == 0 && Double.compare(that.shoulder, shoulder) == 0 && Double.compare(that.rightLeg, rightLeg) == 0 && Double.compare(that.leftLeg, leftLeg) == 0 && Double.compare(that.fatRatio, fatRatio) == 0 && Double.compare(that.muscleRatio, muscleRatio) == 0 && Objects.equals(user, that.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, height, weight, hip, chest, rightSleeve, leftSleeve, shoulder, rightLeg, leftLeg, fatRatio, muscleRatio, user);
     }
 }

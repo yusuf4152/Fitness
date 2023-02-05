@@ -1,48 +1,35 @@
 package com.coding.fitness.dto.requests;
 
 
+import java.util.Objects;
+
 public class CreateBodyMetricDto {
     private String userId;
 
-    private double height=0;
+    private double height = 0;
 
-    private double weight=0;
+    private double weight = 0;
 
-    private double hip=0;
+    private double hip = 0;
 
-    private double chest=0;
+    private double chest = 0;
 
-    private double rightSleeve=0;
+    private double rightSleeve = 0;
 
-    private double leftSleeve=0;
+    private double leftSleeve = 0;
 
-    private double shoulder=0;
+    private double shoulder = 0;
 
-    private double rightLeg=0;
+    private double rightLeg = 0;
 
-    private double leftLeg=0;
+    private double leftLeg = 0;
 
-    private double fatRatio=0;
+    private double fatRatio = 0;
 
-    private double muscleRatio=0;
+    private double muscleRatio = 0;
 
-    public CreateBodyMetricDto(String userId, double height, double weight, double hip, double chest,
-                               double rightSleeve, double leftSleeve, double shoulder, double rightLeg,
-                               double leftLeg, double fatRatio, double muscleRatio) {
-        this.userId = userId;
-        this.height = height;
-        this.weight = weight;
-        this.hip = hip;
-        this.chest = chest;
-        this.rightSleeve = rightSleeve;
-        this.leftSleeve = leftSleeve;
-        this.shoulder = shoulder;
-        this.rightLeg = rightLeg;
-        this.leftLeg = leftLeg;
-        this.fatRatio = fatRatio;
-        this.muscleRatio = muscleRatio;
+    public CreateBodyMetricDto() {
     }
-    public CreateBodyMetricDto(){}
 
     public String getUserId() {
         return userId;
@@ -138,5 +125,18 @@ public class CreateBodyMetricDto {
 
     public void setMuscleRatio(double muscleRatio) {
         this.muscleRatio = muscleRatio;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateBodyMetricDto that = (CreateBodyMetricDto) o;
+        return Double.compare(that.height, height) == 0 && Double.compare(that.weight, weight) == 0 && Double.compare(that.hip, hip) == 0 && Double.compare(that.chest, chest) == 0 && Double.compare(that.rightSleeve, rightSleeve) == 0 && Double.compare(that.leftSleeve, leftSleeve) == 0 && Double.compare(that.shoulder, shoulder) == 0 && Double.compare(that.rightLeg, rightLeg) == 0 && Double.compare(that.leftLeg, leftLeg) == 0 && Double.compare(that.fatRatio, fatRatio) == 0 && Double.compare(that.muscleRatio, muscleRatio) == 0 && Objects.equals(userId, that.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, height, weight, hip, chest, rightSleeve, leftSleeve, shoulder, rightLeg, leftLeg, fatRatio, muscleRatio);
     }
 }

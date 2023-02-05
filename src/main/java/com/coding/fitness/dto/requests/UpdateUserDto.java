@@ -3,6 +3,7 @@ package com.coding.fitness.dto.requests;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 public class UpdateUserDto {
 
@@ -48,5 +49,18 @@ public class UpdateUserDto {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UpdateUserDto that = (UpdateUserDto) o;
+        return age == that.age && Objects.equals(userId, that.userId) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, name, surname, age);
     }
 }

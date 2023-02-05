@@ -4,6 +4,7 @@ package com.coding.fitness.controller;
 import com.coding.fitness.dto.requests.CreateBodyMetricDto;
 import com.coding.fitness.dto.responses.GetBodyMetricDto;
 import com.coding.fitness.service.BodyMetricService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,8 @@ public class BodyMetricController {
     }
 
     @PostMapping("/createBodyMetric")
-    public ResponseEntity<GetBodyMetricDto> createBodyMetric(CreateBodyMetricDto createBodyMetricDto) {
-        return ResponseEntity.ok(bodyMetricService.createBodyMetric(createBodyMetricDto));
+    public ResponseEntity<GetBodyMetricDto> createBodyMetric(@RequestBody CreateBodyMetricDto createBodyMetricDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(bodyMetricService.createBodyMetric(createBodyMetricDto));
     }
 
     @GetMapping("/getAllBodyMetricsByUserId")

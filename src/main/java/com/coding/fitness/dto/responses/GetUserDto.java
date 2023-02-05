@@ -3,6 +3,7 @@ package com.coding.fitness.dto.responses;
 import com.coding.fitness.entity.Role;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class GetUserDto {
     private String id;
@@ -85,5 +86,18 @@ public class GetUserDto {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GetUserDto that = (GetUserDto) o;
+        return age == that.age && isActive == that.isActive && isDeleted == that.isDeleted && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(surname, that.surname) && Objects.equals(email, that.email) && role == that.role && Objects.equals(createdAt, that.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, age, email, role, createdAt, isActive, isDeleted);
     }
 }
